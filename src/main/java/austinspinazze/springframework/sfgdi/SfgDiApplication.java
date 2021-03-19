@@ -1,9 +1,6 @@
 package austinspinazze.springframework.sfgdi;
 
-import austinspinazze.springframework.sfgdi.controllers.ConstructorInjectedController;
-import austinspinazze.springframework.sfgdi.controllers.MyController;
-import austinspinazze.springframework.sfgdi.controllers.PropertyInjectedController;
-import austinspinazze.springframework.sfgdi.controllers.SetterInjectedController;
+import austinspinazze.springframework.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -36,6 +33,10 @@ public class SfgDiApplication {
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
 		// To make this work had to do same steps as above except do not need @Autowire annotation cause spring is smort
+
+		System.out.println("------ Constructor/Spring Profile ------");
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 
 	}
 
