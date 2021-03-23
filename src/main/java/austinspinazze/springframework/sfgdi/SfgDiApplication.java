@@ -1,6 +1,9 @@
 package austinspinazze.springframework.sfgdi;
 
-import austinspinazze.springframework.sfgdi.controllers.*;
+import austinspinazze.springframework.sfgdi.controllers.ConstructorInjectedController;
+import austinspinazze.springframework.sfgdi.controllers.I18nController;
+import austinspinazze.springframework.sfgdi.controllers.MyController;
+import austinspinazze.springframework.sfgdi.controllers.PetController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,33 +14,29 @@ public class SfgDiApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
 
-		System.out.println("------ Primary ------");
-		MyController myController = (MyController) ctx.getBean("myController");
-		System.out.println(myController.sayHello());
-		// Since PrimaryGreetingService has the @Primary annotation this means this will be the default service if a controller does not have specific qualifier
+		PetController petController = ctx.getBean("petController", PetController.class);
+		System.out.println("--- The Best Pet is ---");
+		System.out.println(petController.whichPetIsTheBest());
 
-		System.out.println("------ Property ------");
-		PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
-		System.out.println(propertyInjectedController.getGreeting());
-		// To make this work:
-		// Had to to tell Spring that PropertyInjectedController is a controller using @Controller annotation
-		// Had to also use @Autowired annotation to mark a constructor, field, setter method, or config method as to be autowired by Spring's dependency injection facilities.
-		// Had to tell Spring that GreetingServiceImpl is a spring managed component with @Service annotation
-
-		System.out.println("------ Setter ------");
-		SetterInjectedController setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
-		System.out.println(setterInjectedController.getGreeting());
-		// To make this work had to do same steps above
-
-		System.out.println("------ Constructor ------");
-		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
-		System.out.println(constructorInjectedController.getGreeting());
-		// To make this work had to do same steps as above except do not need @Autowire annotation cause spring is smort
-
-		System.out.println("------ Constructor/Spring Profile ------");
 		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
 		System.out.println(i18nController.sayHello());
 
+		MyController myController = (MyController) ctx.getBean("myController");
+
+		System.out.println("------- Primary Bean");
+		System.out.println(myController.sayHello());
+
+		System.out.println("------ Property");
+		austinspinazze.springframework.sfgdi.controllers.PropertyInjectedController propertyInjectedController = (austinspinazze.springframework.sfgdi.controllers.PropertyInjectedController) ctx.getBean("propertyInjectedController");
+		System.out.println(propertyInjectedController.getGreeting());
+
+		System.out.println("--------- Setter");
+		austinspinazze.springframework.sfgdi.controllers.SetterInjectedController setterInjectedController = (austinspinazze.springframework.sfgdi.controllers.SetterInjectedController) ctx.getBean("setterInjectedController");
+		System.out.println(setterInjectedController.getGreeting());
+
+		System.out.println("-------- Constructor" );
+		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
+		System.out.println(constructorInjectedController.getGreeting());
 	}
 
 }
