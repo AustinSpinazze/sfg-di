@@ -3,9 +3,6 @@ package austinspinazze.springframework.sfgdi.controllers;
 import austinspinazze.springframework.sfgdi.services.PetService;
 import org.springframework.stereotype.Controller;
 
-/**
- * Created by jt on 12/28/19.
- */
 @Controller
 public class PetController {
 
