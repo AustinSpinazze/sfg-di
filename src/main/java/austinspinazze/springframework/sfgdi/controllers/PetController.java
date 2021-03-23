@@ -1,6 +1,6 @@
 package austinspinazze.springframework.sfgdi.controllers;
 
-import austinspinazze.springframework.sfgdi.services.PetService;
+import com.springframework.pets.PetService;
 import org.springframework.stereotype.Controller;
 
 @Controller

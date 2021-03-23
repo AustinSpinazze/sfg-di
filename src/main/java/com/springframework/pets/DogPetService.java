@@ -1,11 +1,11 @@
-package austinspinazze.springframework.sfgdi.services;
+package com.springframework.pets;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Profile({"dog", "default"})
 @Service
-public class DogPetService implements austinspinazze.springframework.sfgdi.services.PetService {
+public class DogPetService implements PetService {
     public String getPetType(){
         return "Dogs are the best!";
     }
