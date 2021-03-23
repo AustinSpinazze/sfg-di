@@ -1,5 +1,7 @@
 package austinspinazze.springframework.sfgdi.config;
 
+import austinspinazze.springframework.sfgdi.repositories.EnglishGreetingRepository;
+import austinspinazze.springframework.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import austinspinazze.springframework.sfgdi.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +17,15 @@ public class GreetingServiceConfig {
         return new I18nSpanishGreetingService();
     }
 
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository() {
+        return new EnglishGreetingRepositoryImpl();
+    }
+
     @Profile("EN")
     @Bean
-    I18nEnglishGreetingService i18nService() {
-        return new I18nEnglishGreetingService();
+    I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository) {
+        return new I18nEnglishGreetingService(englishGreetingRepository);
     }
 
     @Primary
